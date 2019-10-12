@@ -10,7 +10,6 @@ export default class CreateEmployee extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeId = this.onChangeId.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeSurname = this.onChangeSurname.bind(this);
     this.onChangeJob = this.onChangeJob.bind(this);
@@ -18,7 +17,6 @@ export default class CreateEmployee extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      id: 0,
       name: '',
       surname: '',
       jobList: [],
@@ -47,12 +45,6 @@ export default class CreateEmployee extends Component {
 
   //jobList: response.data.map(job => job.jobList)
 
-  onChangeId(e) {
-    this.setState({
-      id: e.target.value
-    });
-  }
-
   onChangeName(e) {
     this.setState({
       name: e.target.value
@@ -77,11 +69,17 @@ export default class CreateEmployee extends Component {
     });
   }
 
+  formatBirthdate() {
+    let date = this.state.birthdate;
+    let formatDate =
+      date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    return formatDate;
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
     const employee = {
-      id: this.state.id,
       name: this.state.name,
       surname: this.state.surname,
       job: this.state.job,
@@ -89,11 +87,10 @@ export default class CreateEmployee extends Component {
     };
     if (
       window.confirm(`Jsou vložena data správná?
-      Id: ${this.state.id}
       Jméno: ${this.state.name}
       Přijmení: ${this.state.surname}
       Pozice: ${this.state.job}
-      Datum narození: ${this.state.bitrhdate}
+      Datum narození: ${this.formatBirthdate()}
       Kliknutím na tlačítko OK, záznam uložíte.
       `)
     ) {
@@ -111,16 +108,6 @@ export default class CreateEmployee extends Component {
       <div>
         <h3>Vložení nového zaměstnance</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>ID: </label>
-            <input
-              type="number"
-              required
-              className="form-control"
-              value={this.state.id}
-              onChange={this.onChangeId}
-            />
-          </div>
           <div className="form-group">
             <label>Jméno: </label>
             <input
@@ -168,7 +155,6 @@ export default class CreateEmployee extends Component {
                 showMonthDropdown
                 locale="cs"
                 dateFormat="dd/MM/yyyy"
-                strictParsing
               />
             </div>
           </div>

@@ -10,7 +10,6 @@ export default class EditEmployee extends Component {
   constructor(props) {
     super(props);
     //bindovani dat
-    this.onChangeId = this.onChangeId.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeSurname = this.onChangeSurname.bind(this);
     this.onChangeJob = this.onChangeJob.bind(this);
@@ -18,7 +17,6 @@ export default class EditEmployee extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      id: 0,
       name: '',
       surname: '',
       jobList: [],
@@ -46,7 +44,6 @@ export default class EditEmployee extends Component {
       .get('http://localhost:5000/employee/' + this.props.match.params.id)
       .then(response => {
         this.setState({
-          id: response.data.id,
           name: response.data.name,
           surname: response.data.surname,
           job: response.data.job,
@@ -59,12 +56,6 @@ export default class EditEmployee extends Component {
   }
 
   //jobList: response.data.map(job => job.jobList)
-
-  onChangeId(e) {
-    this.setState({
-      id: e.target.value
-    });
-  }
 
   onChangeName(e) {
     this.setState({
@@ -90,6 +81,13 @@ export default class EditEmployee extends Component {
     });
   }
 
+  formatBirthdate() {
+    let date = this.state.birthdate;
+    let formatDate =
+      date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    return formatDate;
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -105,11 +103,10 @@ export default class EditEmployee extends Component {
     // neni to uplne idealni, asi by to chtelo refaktoring, mozna pres redux
     if (
       window.confirm(`Jsou vložena data správná?
-      Id: ${this.state.id}
       Jméno: ${this.state.name}
       Přijmení: ${this.state.surname}
       Pozice: ${this.state.job}
-      Datum narození: ${this.state.bitrhdate}
+      Datum narození: ${this.formatBirthdate()}
       Kliknutím na tlačítko OK, záznam uložíte.
       `)
     ) {
@@ -131,16 +128,6 @@ export default class EditEmployee extends Component {
       <div>
         <h3>Editace nového zaměstnance</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>ID: </label>
-            <input
-              type="number"
-              required
-              className="form-control"
-              value={this.state.id}
-              onChange={this.onChangeId}
-            />
-          </div>
           <div className="form-group">
             <label>Jméno: </label>
             <input

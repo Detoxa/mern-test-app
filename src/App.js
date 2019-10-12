@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navbar from './components/navbar.component';
-import EmployeeList from './components/employee-list.component';
+import EmployeeTable from './components/employee-table.component';
 import EditEmployee from './components/edit-employee.component';
 import CreateEmployee from './components/create-employee.component';
 
@@ -15,7 +15,7 @@ class App extends Component {
         <div className="container">
           <Navbar />
           <br />
-          <Route path="/" exact component={EmployeeList} />
+          <Route path="/" exact component={EmployeeTable} />
           <Route path="/edit:id" exact component={EditEmployee} />
           <Route path="/create" exact component={CreateEmployee} />
         </div>

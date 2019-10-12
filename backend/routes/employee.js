@@ -11,14 +11,12 @@ router.route('/').get((req, res) => {
 
 // post request vlozi data
 router.route('/add').post((req, res) => {
-  const id = Number(req.body.id);
   const name = req.body.name;
   const surname = req.body.surname;
   const job = req.body.job;
-  const birthdate = req.body.birthdate;
+  const birthdate = req.body.birthdate.toString();
   // vytvori promenou kde se ukladaji data
   const newEmployee = new Employee({
-    id,
     name,
     surname,
     job,
@@ -42,11 +40,10 @@ router.route('/:id').delete((req, res) => {
     .then(() => res.json('Zaměstnanec odešel na ÚP!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
-// update zaznamu dle ID
+// update zaznamu dle mongo ID
 router.route('/update/:id').post((req, res) => {
   Employee.findById(req.params.id)
     .then(employee => {
-      employee.id = Number(req.body.id);
       employee.name = req.body.name;
       employee.surname = req.body.surname;
       employee.job = req.body.job;
