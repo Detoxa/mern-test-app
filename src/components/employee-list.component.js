@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class EmployeeList extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.deleteEmployee = this.deleteEmployee.bind(this);
 
-    this.state = { employee: [] };
+    this.state = {
+      employee: []
+    };
   }
   // pri inicializaci komponenty se nacte seznam z API
   componentDidMount() {
@@ -32,40 +34,50 @@ export default class EmployeeList extends Component {
   }
 
   render() {
-    return this.state.employee.map(currentEmployee => {
-      return (
-        <tr
-          employee={currentEmployee}
-          deleteEmployee={this.deleteEmployee}
-          key={currentEmployee._id}
-        >
-          <td>{currentEmployee.name}</td>
-          <td>{currentEmployee.surname}</td>
-          <td>{currentEmployee.job}</td>
-          <td>{currentEmployee.birthdate.substring(0, 10)}</td>
-          <td>
-            <Link to={'/edit' + currentEmployee._id}>
-              <button type="button" className="btn btn-secondary m-1">
-                Editovat
-              </button>
-            </Link>{' '}
-            <button
-              onClick={() => {
-                if (
-                  window.confirm(
-                    'Opravdu chcete vyhodit zaměstnance na dlažbu?'
-                  )
-                )
-                  this.deleteEmployee(currentEmployee._id);
-              }}
-              type="button"
-              className="btn btn-danger m-1"
+    return (
+      this.state.employee
+        //includes je case-sensitive
+        .filter(el =>
+          el.surname
+            .toLowerCase()
+            .includes(this.props.inputSearch.toLowerCase())
+        )
+        .map(currentEmployee => {
+          return (
+            <tr
+              employee={currentEmployee}
+              deleteEmployee={this.deleteEmployee}
+              key={currentEmployee._id}
             >
-              Propustit
-            </button>
-          </td>
-        </tr>
-      );
-    });
+              <td>{currentEmployee.name}</td>
+              <td>{currentEmployee.surname}</td>
+              <td>{currentEmployee.job}</td>
+              <td>{currentEmployee.birthdate.substring(0, 10)}</td>
+              <td>
+                <Link to={'/edit' + currentEmployee._id}>
+                  <button type="button" className="btn btn-secondary m-1">
+                    Editovat
+                  </button>
+                </Link>{' '}
+                <button
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Opravdu chcete vyhodit zaměstnance na dlažbu?'
+                      )
+                    )
+                      this.deleteEmployee(currentEmployee._id);
+                  }}
+                  type="button"
+                  className="btn btn-danger m-1"
+                >
+                  Propustit
+                </button>
+                <p>{this.props.inputSearch}</p>
+              </td>
+            </tr>
+          );
+        })
+    );
   }
 }
