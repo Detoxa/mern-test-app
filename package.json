@@ -8,10 +8,6 @@
     "cors": "^2.8.5",
     "date-fns": "^2.4.1",
     "dotenv": "^8.1.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "event-emitter": "^0.3.5",
-    "events": "^3.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.4",
     "react": "^16.10.2",
@@ -20,8 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-test-renderer": "^16.10.2",
-    "styled-components": "^4.4.0",
-    "yarn": "^1.19.1"
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "MERN - TEST - APP",
   "main": "index.js",
   "devDependencies": {
     "jest": "^24.9.0"
