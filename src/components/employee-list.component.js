@@ -46,7 +46,7 @@ export default class EmployeeList extends Component {
   render() {
     return (
       this.state.employee
-        //includes je case-sensitive, tak tam dame vsude lovercase
+        //includes je case-sensitive, tak tam dame vsude lowercase
         .filter(el =>
           el.surname
             .toLowerCase()
