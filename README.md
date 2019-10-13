@@ -26,7 +26,7 @@ Vytvořte webovou aplikaci se seznamem zaměstnanců ideálně pomocí Angular 2
 
 ---
 
-### Spuštení aplikace:
+### Spuštění aplikace:
 
 1. git clone https://github.com/Detoxa/mern-test-app.git
 2. v adresáři mern-test-app a backend nainstalujeme závislosti příkazem npn install
