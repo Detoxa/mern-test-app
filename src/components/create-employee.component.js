@@ -72,7 +72,7 @@ export default class CreateEmployee extends Component {
   formatBirthdate() {
     let date = this.state.birthdate;
     let formatDate =
-      date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+      date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     return formatDate;
   }
 
@@ -86,7 +86,7 @@ export default class CreateEmployee extends Component {
       birthdate: this.state.birthdate
     };
     if (
-      window.confirm(`Jsou vložena data správná?
+      window.confirm(`Zapsali jste zaměstnance:
       Jméno: ${this.state.name}
       Přijmení: ${this.state.surname}
       Pozice: ${this.state.job}
@@ -116,15 +116,18 @@ export default class CreateEmployee extends Component {
               className="form-control"
               value={this.state.name}
               onChange={this.onChangeName}
+              placeholder="zadejte jméno"
             />
           </div>
           <div className="form-group">
             <label>Přijmení: </label>
             <input
               type="text"
+              required
               className="form-control"
               value={this.state.surname}
               onChange={this.onChangeSurname}
+              placeholder="zadejte přijmení"
             />
           </div>
           <div className="form-group">

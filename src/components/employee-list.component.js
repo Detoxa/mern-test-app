@@ -23,7 +23,7 @@ export default class EmployeeList extends Component {
         console.log(error);
       });
   }
-  // smazeme data dle id pres API
+  // smazeme data dle id mongoo pres API
   deleteEmployee(id) {
     axios
       .delete('http://localhost:5000/employee/' + id)
@@ -33,10 +33,20 @@ export default class EmployeeList extends Component {
     });
   }
 
+  // tak to je trosku hardcore, ale fakt nevim jak to jinak zformatovat
+  formatBirthdate(inc) {
+    let date = inc
+      .substring(0, 10)
+      .split('-')
+      .reverse()
+      .join('.');
+    return date.toString();
+  }
+
   render() {
     return (
       this.state.employee
-        //includes je case-sensitive
+        //includes je case-sensitive, tak tam dame vsude lovercase
         .filter(el =>
           el.surname
             .toLowerCase()
@@ -52,7 +62,7 @@ export default class EmployeeList extends Component {
               <td>{currentEmployee.name}</td>
               <td>{currentEmployee.surname}</td>
               <td>{currentEmployee.job}</td>
-              <td>{currentEmployee.birthdate.substring(0, 10)}</td>
+              <td>{this.formatBirthdate(currentEmployee.birthdate)}</td>
               <td>
                 <Link to={'/edit' + currentEmployee._id}>
                   <button type="button" className="btn btn-secondary m-1">
@@ -63,7 +73,7 @@ export default class EmployeeList extends Component {
                   onClick={() => {
                     if (
                       window.confirm(
-                        'Opravdu chcete vyhodit zaměstnance na dlažbu?'
+                        `Opravdu chcete propustit zaměstnance: ${currentEmployee.name} ${currentEmployee.surname} ?`
                       )
                     )
                       this.deleteEmployee(currentEmployee._id);
@@ -73,7 +83,6 @@ export default class EmployeeList extends Component {
                 >
                   Propustit
                 </button>
-                <p>{this.props.inputSearch}</p>
               </td>
             </tr>
           );

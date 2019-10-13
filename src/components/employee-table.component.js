@@ -15,7 +15,7 @@ export default class EmployeeTable extends Component {
         <div className="input-group input-group-sm mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text" id="inputGroup-sizing-sm">
-              Hledání zaměstnanců podle příjmení
+              Vyhledání zaměstnanců:
             </span>
           </div>
           <input
@@ -24,6 +24,7 @@ export default class EmployeeTable extends Component {
             className="form-control"
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
+            placeholder="zadejte přijmení zaměstnance"
           />
         </div>
         <h3>Zaměstnanci:</h3>

@@ -21,7 +21,7 @@ export default class EditEmployee extends Component {
       surname: '',
       jobList: [],
       job: '',
-      birthdate: new Date()
+      birthdate: ''
     };
   }
 
@@ -84,7 +84,7 @@ export default class EditEmployee extends Component {
   formatBirthdate() {
     let date = this.state.birthdate;
     let formatDate =
-      date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+      date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     return formatDate;
   }
 
@@ -102,7 +102,7 @@ export default class EditEmployee extends Component {
     //console.log(employee);
     // neni to uplne idealni, asi by to chtelo refaktoring, mozna pres redux
     if (
-      window.confirm(`Jsou vložena data správná?
+      window.confirm(`Chcete uložit zaměstnance:
       Jméno: ${this.state.name}
       Přijmení: ${this.state.surname}
       Pozice: ${this.state.job}
@@ -136,6 +136,7 @@ export default class EditEmployee extends Component {
               className="form-control"
               value={this.state.name}
               onChange={this.onChangeName}
+              placeholder="zadejte jméno"
             />
           </div>
           <div className="form-group">
@@ -145,6 +146,7 @@ export default class EditEmployee extends Component {
               className="form-control"
               value={this.state.surname}
               onChange={this.onChangeSurname}
+              placeholder="zadejte přijmení"
             />
           </div>
           <div className="form-group">
